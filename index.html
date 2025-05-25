@@ -1,201 +1,139 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dreamy Card</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dreamyy - Emote ⚡</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(-45deg, #222831, #393E46, #00ADB5, #EEEEEE);
-      background-size: 400% 400%;
-      animation: bgmove 12s ease infinite;
-      transition: background 0.5s ease;
-      color: #222831;
-    }
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    font-family: 'Poppins', sans-serif;
+  }
 
-    body.red-theme {
-      background: linear-gradient(-45deg, #330000, #660000, #cc0000, #ff6666);
-      background-size: 400% 400%;
-      color: #660000;
-    }
+  .card-container {
+    perspective: 1500px;
+    width: 300px;
+    height: 400px;
+  }
 
-    @keyframes bgmove {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+  .card {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-    .card {
-      background: rgba(255, 255, 255, 0.95);
-      color: inherit;
-      width: 320px;
-      padding: 2em;
-      border-radius: 20px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-      text-align: center;
-      transition: 0.4s ease, color 0.4s ease;
-    }
+  .card:hover {
+    transform: rotateY(180deg);
+  }
 
-    .card:hover {
-      transform: scale(1.03);
-    }
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    backface-visibility: hidden;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6rem;
+  }
 
-    h2 {
-      margin: 0 0 10px 0;
-    }
+  .card-front {
+    background: #00adb5;
+    color: #eeeeee;
+    font-weight: 900;
+    user-select: none;
+  }
 
-    .typewriter {
-      display: inline-block;
-      overflow: hidden;
-      border-right: .15em solid #00ADB5;
-      white-space: nowrap;
-      animation: typing 3s steps(40, end), blink .75s step-end infinite;
-      font-size: 14px;
-      margin-bottom: 10px;
-      transition: border-color 0.5s ease;
-      color: inherit;
-    }
+  .card-back {
+    background: #00adb5;
+    color: #eeeeee;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+  }
 
-    body.red-theme .typewriter {
-      border-color: #cc0000;
-      animation: typing 3s steps(40, end), blinkRed .75s step-end infinite;
-    }
+  .card-back h2 {
+    margin: 0;
+    font-size: 2rem;
+  }
 
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
+  .card-back p {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
 
-    @keyframes blink {
-      0%, 100% { border-color: transparent }
-      50% { border-color: #00ADB5; }
-    }
-
-    @keyframes blinkRed {
-      0%, 100% { border-color: transparent }
-      50% { border-color: #cc0000; }
-    }
-
-    .social {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      font-size: 1.1em;
-    }
-
-    .social a {
-      text-decoration: none;
-      color: #00ADB5;
-      transition: 0.3s;
-    }
-
-    body.red-theme .social a {
-      color: #cc0000;
-    }
-
-    .social a:hover {
-      transform: scale(1.2);
-      color: #222831;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #00ADB5;
-      color: white;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    body.red-theme .btn {
-      background: #cc0000;
-      color: #fff1f1;
-    }
-
-    .btn:hover {
-      background: #222831;
-      color: #EEEEEE;
-    }
-
-    /* Toggle button styles */
-    .toggle-container {
-      margin-top: 20px;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .toggle-btn {
-      cursor: pointer;
-      padding: 10px 25px;
-      border: none;
-      border-radius: 30px;
-      font-weight: bold;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-      color: white;
-    }
-
-    .toggle-btn.blue {
-      background-color: #00ADB5;
-    }
-
-    .toggle-btn.red {
-      background-color: #cc0000;
-    }
-
-    .toggle-btn:hover {
-      background-color: #222831;
-    }
-  </style>
+  .shadow {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(0,173,181,0.6), transparent 60%);
+    border-radius: 50%;
+    filter: blur(35px);
+    pointer-events: none;
+    transition: transform 0.1s ease;
+    z-index: -1;
+  }
+</style>
 </head>
 <body>
-  <div>
-    <div class="card">
-      <h2>never give up</h2>
-      <div class="typewriter">just do it, I'm always here to support XD 🙌🏻</div>
-      <p>Ganbatte ne!</p>
 
-      <div class="social">
-        <a href="" target="_blank">⚡ Spirit</a>
-        <a href="" target="_blank">🐱 Energic</a>
+  <div class="card-container">
+    <div class="card" id="card">
+      <div class="card-face card-front">⚡</div>
+      <div class="card-face card-back">
+        <h2>DapDap</h2>
+        <p>SEMANGAT TATAKAEE!</p>
+        <p>just do it and don't give up, I'm always here to support XD 🙌🏻</p>
       </div>
-
-      <a href="#" class="btn">DapDap</a>
     </div>
-
-    <div class="toggle-container">
-      <button class="toggle-btn blue" id="blueBtn">Blue for Dreamy</button>
-      <button class="toggle-btn red" id="redBtn">Red for Tatakae!</button>
-    </div>
+    <div class="shadow" id="shadow"></div>
   </div>
 
-  <script>
-    const blueBtn = document.getElementById('blueBtn');
-    const redBtn = document.getElementById('redBtn');
+<script>
+  const card = document.getElementById('card');
+  const shadow = document.getElementById('shadow');
 
-    blueBtn.addEventListener('click', () => {
-      document.body.classList.remove('red-theme');
-    });
+  document.querySelector('.card-container').addEventListener('mousemove', (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    redBtn.addEventListener('click', () => {
-      document.body.classList.add('red-theme');
-    });
-  </script>
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * 10; // max 10deg rotateX
+    const rotateY = ((x - centerX) / centerX) * 10; // max 10deg rotateY
+
+    card.style.transform = `rotateY(180deg) rotateX(${ -rotateX }deg) rotateY(${ rotateY }deg)`;
+
+    shadow.style.transform = `translate(${ (centerX - x) / 2 }px, ${(centerY - y) / 2}px)`;
+  });
+
+  document.querySelector('.card-container').addEventListener('mouseleave', () => {
+    card.style.transform = 'rotateY(180deg) rotateX(0) rotateY(0)';
+    shadow.style.transform = 'translate(0, 0)';
+  });
+</script>
+
 </body>
 </html>
